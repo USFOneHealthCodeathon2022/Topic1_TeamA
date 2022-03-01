@@ -1,0 +1,45 @@
+---
+title: "Rare Disease Meta-Analysis"
+output: flexdashboard::flex_dashboard
+runtime: shiny
+---
+  
+  Column
+-------------------------------------
+  
+  This dashboard queries ClinicalTrials.gov. Input your disease, and the output will be a meta-analysis.
+  
+```{r}
+  textInput("disease", "Disease")
+  #renderText({ input$disease })
+  
+  textInput("drug", "Drug")
+  #renderText({ input$drug })
+```
+  
+```{r}
+joy = read.csv("ebmental-2019-November-22-4-153-inline-supplementary-material-1.txt")
+library("meta")
+library("metasens")
+
+settings.meta(digits = 2)
+
+m.publ = metabin(resp.h, resp.h + fail.h, resp.p, resp.p + fail.p,
+                 data = joy, studlab = paste0(author, " (", year, ")"),
+                 method.tau = "PM")
+
+print(m.publ)
+
+```
+
+  Column
+-------------------------------------
+
+```{r}
+
+# png("~/Desktop/small.png", width = 600, height = 400)
+forest(m.publ, sortvar = year, prediction = TRUE,
+       label.left = "Left label", label.right = "Right label")
+# dev.off()
+
+```
