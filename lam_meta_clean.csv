@@ -1,0 +1,10 @@
+﻿study,baseline_mean,baseline_sd,n_base,outcome_mean,outcome_sd,n_outcome,drug,test
+1,-464.3,745.23,21,-1771.7,2091.6,21,everolimus,vegf
+3,17.6,57.51,79,38.7,141.89,79,everolimus,vegf
+4,0.07,0.13,7,0.05,0.1,8,imatinib,vegf
+mccormack2011,-134,182,43,19,124,46,sirolimus,fev
+hu2019,-178,36,67,-10,15,67,sirolimus,fev
+gupta2019,-17,3,34,-1,2,41,sirolimus,fev
+ando2013,-115.4,86.2,15,127.8,289.6,15,sirolimus,fev
+taveiradasilva2011,-100,30,19,50,20,19,sirolimus,fev
+yao2014,1,0.3,12,-2.3,0.1,12,sirolimus,fev
