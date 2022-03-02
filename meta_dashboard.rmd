@@ -1,0 +1,59 @@
+---
+title: "Rare Disease Meta-Analysis"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: row
+    vertical_layout: scroll
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Input
+
+  This dashboard queries ClinicalTrials.gov. Researchers running clinical trials are required to register their trials, but submitting their results is optional. Many trials and other research are not available from ClinicalTrials.gov. Thus, the querying tool is very limited in the studies it uses for analysis. Thank you for your patience with this beta version.
+  
+  Input the disease and treatment drug that you want to evaluate, and the output will be a meta-analysis limited to the study results available on ClinicalTrials.gov.
+  
+```{r}
+  textInput("disease", "Disease")
+  
+  textInput("drug", "Drug")
+```
+  
+
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Summary Statistics
+
+```{r, fig.width=6, fig.height=6}
+joy = read.csv("ebmental-2019-November-22-4-153-inline-supplementary-material-1.txt")
+library("meta")
+library("metasens")
+
+settings.meta(digits = 2)
+
+m.publ = metabin(resp.h, resp.h + fail.h, resp.p, resp.p + fail.p,
+                 data = joy, studlab = paste0(author, " (", year, ")"),
+                 method.tau = "PM")
+
+print(m.publ)
+
+```
+
+### Forest Plot
+
+```{r, fig.width=10, fig.height=5}
+
+forest(m.publ, sortvar = year, prediction = TRUE,
+       label.left = "Left label", label.right = "Right label")
+
+```
+
