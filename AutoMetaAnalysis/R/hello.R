@@ -2,7 +2,7 @@
 #'
 #' @description This is an example function named 'hello' which prints 'Hello, World!'.
 #'
-#' @param string Describe a parameter here.
+#' @param argument.name Describe an argument here.
 #'
 #' @return This is the return value.
 #' @export

@@ -7,7 +7,7 @@
 hello()
 }
 \arguments{
-\item{string}{Describe a parameter here.}
+\item{argument.name}{Describe an argument here.}
 }
 \value{
 This is the return value.
