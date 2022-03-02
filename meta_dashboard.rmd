@@ -34,26 +34,24 @@ Column {data-width=650}
 ### Summary Statistics
 
 ```{r, fig.width=6, fig.height=6}
-joy = read.csv("ebmental-2019-November-22-4-153-inline-supplementary-material-1.txt")
+joy = read.csv("lam_meta_clean.csv")
 library("meta")
 library("metasens")
 
 settings.meta(digits = 2)
 
-m.publ = metabin(resp.h, resp.h + fail.h, resp.p, resp.p + fail.p,
-                 data = joy, studlab = paste0(author, " (", year, ")"),
-                 method.tau = "PM")
+library(AutoMetaAnalysis)
+meta.obj <- meta.calc(joy, "Title")
+summary(meta.obj)
 
-print(m.publ)
 
 ```
 
 ### Forest Plot
 
-```{r, fig.width=10, fig.height=5}
+```{r, fig.width=12, fig.height=5}
 
-forest(m.publ, sortvar = year, prediction = TRUE,
-       label.left = "Left label", label.right = "Right label")
+forest(meta.obj)
 
 ```
 
